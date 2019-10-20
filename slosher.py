@@ -35,6 +35,8 @@ class MyWidget(QtWidgets.QWidget):
         image = QPixmap('slosher/logo.png')
         self.logo = QLabel(self)
         self.logo.setPixmap(image)
+        self.logo.setFixedHeight(image.height())
+        self.logo.setAlignment(Qt.AlignRight)
 
         self.formGroupBox = QGroupBox("User data")
         self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHours)
