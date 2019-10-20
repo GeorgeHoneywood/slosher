@@ -1,6 +1,10 @@
 import sys
 import random
 from PySide2 import QtCore, QtWidgets, QtGui
+#from PySide2.QtCore import *
+#from PySide2.QtGui import *
+from PySide2.QtGui import QColor
+from PySide2.QtCore import Qt
 
 class MyWidget(QtWidgets.QWidget):
     def __init__(self):
@@ -27,6 +31,11 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
 
     widget = MyWidget()
+    palette = widget.palette()
+    
+    palette.setColor(widget.backgroundRole(), QColor(93,91,89))
+    widget.setPalette(palette)
+
     widget.resize(800, 600)
     widget.show()
 
