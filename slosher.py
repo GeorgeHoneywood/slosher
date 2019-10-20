@@ -124,7 +124,7 @@ class Recomend(object):
     def __init__(self):
         self.drinks = Retrieve("drinks.csv")
         self.currentdrink = self.drinks[random.randint(0,len(self.drinks) - 1)]
-        self.currentBACs = burate * timebetween * self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text())
+        self.currentBACs = burnate * timebetween * self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text())
         self.drunk = False
         self.recomended = []
         self.time = 0
@@ -132,11 +132,11 @@ class Recomend(object):
     def NextDrink(self):
         possibledrinks = []
         for i in self.drinks:
-            if self.currentBACs + burate * timebetween * i.BAC(MyWidget.txtWeight.text(),MyWidget.cbGender.text())< maxbacs and self.currentBACs+burate * timebetween * i.BAC(MyWidget.txtWeight.text(),MyWidget.cbGender.text()) > minbacs and i.catagory = self.currentdrink.catagory:
+            if burnate * timebetween * (self.currentBACs + i.BAC(MyWidget.txtWeight.text(),MyWidget.cbGender.text()))< maxbacs and burnate * timebetween * (self.currentBACs + i.BAC(MyWidget.txtWeight.text(),MyWidget.cbGender.text())) > minbacs and i.catagory == self.currentdrink.catagory:
                 possibledrinks.append(i)
 
         self.currentdrink = possibledrinks[random.randint(0, len(possibledrinks) - 1)]
-        self.currentBACs = self.currentBACs + (burate * timebetween * self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text()))
+        self.currentBACs = burnrate * timebetween * (self.currentBACs + self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text()))
         self.time += timebetween
 
   def GetDrinks(self):
