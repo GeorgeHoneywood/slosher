@@ -27,11 +27,16 @@ class MyWidget(QtWidgets.QWidget):
 
     def layoutUI(self):
         self.layout = QtWidgets.QVBoxLayout()
+        self.form = QFormLayout()
 
+        self.formGroupBox = QGroupBox("User data")
+        self.form.addRow(QLabel("Height:"), self.txtHeight)
+        self.form.addRow(QLabel("Weight:"), self.txtWeight)
+        self.form.addRow(QLabel("Gender:"), self.cbGender)
+        self.formGroupBox.setLayout(self.form)
         
         self.layout.addWidget(self.formGroupBox)
 
-        self.layout.addWidget(self.txtHeight)
         self.layout.addWidget(self.btnCalculate)
 
         self.setLayout(self.layout)
@@ -53,7 +58,7 @@ if __name__ == "__main__":
     widget = MyWidget()
     palette = widget.palette()
     
-    palette.setColor(widget.backgroundRole(), QColor(93,91,89))
+    #palette.setColor(widget.backgroundRole(), QColor(93,91,89))
     widget.setPalette(palette)
 
     widget.resize(800, 600)
@@ -70,7 +75,7 @@ class Drink(object):
         self.quantity = quantity
         self.units = units
         
-        if(self.style = ""):
+        if(self.style == ""):
             self.VoidStyle()
 
 
