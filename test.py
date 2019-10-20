@@ -39,3 +39,36 @@ if __name__ == "__main__":
 
     sys.exit(app.exec_())
 
+class Drink(object):
+    def __init__(self, product, brand, catagory, style, quantity, units):
+        self.product = product
+        self.brand = brand
+        self.catagory = catagory
+        self.style = style
+        self.quantity = quantity
+        self.units = units
+        
+        if(self.style = ""):
+            self.VoidStyle()
+
+
+    def VoidStyle(self):
+        self.style = self.catagory
+
+    def BAC(self, weight, sex):
+        if(sex.lower == "female"):
+            r = 0.55
+        elif(sex.lower == "male"):
+            r = 0.68
+
+        self.bac = ( self.AcoholGrams / (weight * r) ) * 100
+
+    def AcoholGrams(self):
+        return self.units * 8
+        
+
+
+
+
+        
+
