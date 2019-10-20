@@ -10,6 +10,8 @@ class MyWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setWindowTitle("Slosher")
+
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
         self.text = QtWidgets.QLabel("Hello World")
         self.text.setAlignment(QtCore.Qt.AlignCenter)
