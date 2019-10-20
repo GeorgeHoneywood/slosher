@@ -23,6 +23,7 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
         self.txtHours = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
+        self.lblResults = QLabel(self)
 
         self.cbSex = QComboBox(self)
         self.cbSex.addItems(["Male", "Female"])
@@ -69,8 +70,9 @@ class MyWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.formGroupBox)
 
         self.layout.addWidget(self.btnCalculate)
+        self.layout.addWidget(self.lbl)
 
-        self.setLayout(self.layout)
+        self.lblLayout(self.layout)
 
     def connectUI(self):
         self.btnCalculate.clicked.connect(self.calculate)
