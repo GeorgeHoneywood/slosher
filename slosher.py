@@ -19,7 +19,7 @@ class MyWidget(QtWidgets.QWidget):
         self.setWindowTitle("Slosher")
 
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
-        self.txtHeight = QLineEdit(self)
+        self.txtHours = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
         self.cbSex = QComboBox(self)
 
@@ -33,12 +33,11 @@ class MyWidget(QtWidgets.QWidget):
         self.form = QFormLayout()
 
         image = QPixmap('slosher/logo.png')
-        print(image.width())
         self.logo = QLabel(self)
         self.logo.setPixmap(image)
 
         self.formGroupBox = QGroupBox("User data")
-        self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHeight)
+        self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHours)
         self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
         self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.formGroupBox.setLayout(self.form)
@@ -54,7 +53,6 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate.clicked.connect(self.calculate)
 
     def calculate(self):
-        print(self.txtHeight.text())
         pass
 
 if __name__ == "__main__":
@@ -118,7 +116,3 @@ def Retrieve (csv):
     file.close()
         
 #Retrieve("Open-Units.csv")   
-
-
-
-  
