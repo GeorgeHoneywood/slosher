@@ -33,7 +33,7 @@ class MyWidget(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout()
         self.form = QFormLayout()
 
-        image = QPixmap('slosher/logo.png')
+        image = QPixmap('logo.png')
         self.logo = QLabel(self)
         self.logo.setPixmap(image)
         self.logo.setFixedHeight(image.height())
