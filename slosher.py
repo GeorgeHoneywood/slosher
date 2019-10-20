@@ -44,12 +44,13 @@ class MyWidget(QtWidgets.QWidget):
         self.logo.setFixedHeight(image.height())
         self.logo.setAlignment(Qt.AlignRight)
 
-        self.lblTitle = QLabel("The correct amount for you to drink")
+        self.lblTitle = QLabel("The correct amount for you to drink.")
 
         self.titleBox = QGroupBox()
         self.title.addWidget(self.lblTitle)
         self.title.addWidget(self.logo)
         self.titleBox.setLayout(self.title)
+        self.titleBox.setFixedHeight(200)
 
         self.formGroupBox = QGroupBox("User data")
         self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHours)
@@ -57,7 +58,7 @@ class MyWidget(QtWidgets.QWidget):
         self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.form.addRow(QLabel("Inebriation level:"), self.slInebriation)
         self.formGroupBox.setLayout(self.form)
-        
+
         self.layout.addWidget(self.titleBox)
         self.layout.addWidget(self.formGroupBox)
 
