@@ -32,8 +32,10 @@ class MyWidget(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout()
         self.form = QFormLayout()
 
+        image = QPixmap('slosher/logo.png')
+        print(image.width())
         self.logo = QLabel(self)
-
+        self.logo.setPixmap(image)
 
         self.formGroupBox = QGroupBox("User data")
         self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHeight)
@@ -41,6 +43,7 @@ class MyWidget(QtWidgets.QWidget):
         self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.formGroupBox.setLayout(self.form)
         
+        self.layout.addWidget(self.logo)
         self.layout.addWidget(self.formGroupBox)
 
         self.layout.addWidget(self.btnCalculate)
