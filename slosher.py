@@ -18,6 +18,7 @@ class MyWidget(QtWidgets.QWidget):
         super().__init__()
 
         self.setWindowTitle("Slosher")
+        self.setWindowIcon(QtGui.QIcon('icon.png'))
 
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
         self.txtHours = QLineEdit(self)
