@@ -80,9 +80,14 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate.clicked.connect(self.calculate)
 
     def calculate(self):
+        minbacs = (float(self.slInebriation.value())/100) - 0.005
+        maxbacs = (float(self.slInebriation.value())/100) + 0.005
+        timebetween = (float(self.txtBetween.text()) / 60)
         recomend = Recomend()
+        foo = ""
         for i in recomend.recomended:
-            print(i.product)
+            foo = foo + i.product + " " + i.quantity + i.quantityunits + "\n"
+        self.lblResults.setText(foo)
 
 
 class Drink(object):
@@ -147,12 +152,12 @@ class Recomend(object):
         self.time += timebetween
 
     def GetDrinks(self):
-        while not self.drunk and self.time < (int)(widget.txtHours.text()):
+        while not self.drunk and self.time < int(widget.txtHours.text()) / 60:
             self.FirstDrinks()
             self.recomended.append(self.currentdrink)
             if(self.currentBACs > minbacs):
                 self.drunk = True
-        while self.time < (int)(widget.txtHours.text()):
+        while self.time < (int(widget.txtHours.text()) / 60):
             self.NextDrink()
             self.recomended.append(self.currentdrink)
         
