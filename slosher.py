@@ -9,7 +9,8 @@ from PySide2.QtCore import *
 from PySide2.QtWidgets import *
 
 burnrate = 0.984
-goalbacs = 0.07
+minbacs = 0.07
+maxbacs = 0.08
 timebetween = 0.25
 
 class MyWidget(QtWidgets.QWidget):
@@ -92,7 +93,7 @@ class Drink(object):
         elif(sex.lower == "male"):
             r = 0.68
 
-        self.bac = ( self.AcoholGrams / (weight * r) ) * 100
+        self.bac = ( self.AcoholGrams / (int(weight) * r) ) * 100
 
     def AcoholGrams(self):
         return self.units * 8
@@ -114,5 +115,32 @@ def Retrieve (csv):
         drinks.append(Drink(array[0],array[1],array[2],array[3],array[4],array[5],array[6]))
     #print (drinks)
     file.close()
+    return drinks
         
 #Retrieve("Open-Units.csv")   
+class Recomend(object):
+    def __init__(self):
+        self.drinks = Retrieve("drinks.csv")
+        self.currentdrink = self.drinks[random.randint(0,len(self.drinks) - 1)]
+        self.currentBACs = burate * timebetween * self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text())
+        self.drunk = False
+        self.recomended = []
+        self.time = 0
+
+    def NextDrink(self):
+        possibledrinks = []
+        for i in self.drinks:
+            if self.currentBACs + burate * timebetween * i.BAC(MyWidget.txtWeight.text(),MyWidget.cbGender.text())< maxbacs and self.currentBACs+burate * timebetween * i.BAC(MyWidget.txtWeight.text(),MyWidget.cbGender.text()) > minbacs and i.catagory = self.currentdrink.catagory:
+                possibledrinks.append(i)
+
+        self.currentdrink = possibledrinks[random.randint(0, len(possibledrinks) - 1)]
+        self.currentBACs = self.currentBACs + (burate * timebetween * self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text()))
+        self.time += timebetween
+
+  def GetDrinks(self):
+      while not self.drunk:
+          #and self.time < TOTALTIME#
+          if(self.currentBACs > minbacs):
+              self.drunk = True
+      #while self.time < TOTAL TIME:
+          self.NextDrink()        
