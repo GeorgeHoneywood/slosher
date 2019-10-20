@@ -3,26 +3,38 @@ import random
 from PySide2 import QtCore, QtWidgets, QtGui
 #from PySide2.QtCore import *
 #from PySide2.QtGui import *
-from PySide2.QtGui import QColor
-from PySide2.QtCore import Qt
+
+from PySide2.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
+
 
 class MyWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.btnCalculate = QtWidgets.QPushButton("Calculate!")
-        self.text = QtWidgets.QLabel("Hello World")
-        self.text.setAlignment(QtCore.Qt.AlignCenter)
+        self.setWindowTitle("Slosher")
 
+        self.btnCalculate = QtWidgets.QPushButton("Calculate!")
+        self.txtHeight = QLineEdit(self)
+        self.txtWeight = QLineEdit(self)
+        #self.txtGender = 
+        #self.text.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.layoutUI()
+        self.connectUI()
+
+    def layoutUI(self):
         self.layout = QtWidgets.QVBoxLayout()
-        self.layout.addWidget(self.text)
+
+        self.layout.addWidget(self.txtHeight)
         self.layout.addWidget(self.btnCalculate)
         self.setLayout(self.layout)
 
-        self.btnCalculate.clicked.connect(self.magic)
+    def connectUI(self):
+        self.btnCalculate.clicked.connect(self.calculate)
 
-
-    def magic(self):
+    def calculate(self):
         self.text.setText("E")
 
 if __name__ == "__main__":
@@ -70,5 +82,4 @@ class Drink(object):
 
 
 
-        
-
+  
