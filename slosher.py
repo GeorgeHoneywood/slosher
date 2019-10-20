@@ -8,7 +8,6 @@ from PySide2.QtGui import *
 from PySide2.QtCore import *
 from PySide2.QtWidgets import *
 
-
 burnrate = 0.984
 minbacs = 0.07
 maxbacs = 0.08
@@ -21,11 +20,11 @@ class MyWidget(QtWidgets.QWidget):
         self.setWindowTitle("Slosher")
 
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
-        self.txtHeight = QLineEdit(self)
+        self.txtHours = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
-        self.cbGender = QCheckBox("Male?", self)
-        #self.txtGender = 
-        #self.text.setAlignment(QtCore.Qt.AlignCenter)
+        self.cbSex = QComboBox(self)
+
+        self.cbSex.addItems(["Male", "Female"])
 
         self.layoutUI()
         self.connectUI()
@@ -34,28 +33,28 @@ class MyWidget(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout()
         self.form = QFormLayout()
 
+        image = QPixmap('slosher/logo.png')
+        self.logo = QLabel(self)
+        self.logo.setPixmap(image)
+
         self.formGroupBox = QGroupBox("User data")
-        self.form.addRow(QLabel("Height:"), self.txtHeight)
-        self.form.addRow(QLabel("Weight:"), self.txtWeight)
-        self.form.addRow(QLabel("Gender:"), self.cbGender)
+        self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHours)
+        self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
+        self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.formGroupBox.setLayout(self.form)
         
+        self.layout.addWidget(self.logo)
         self.layout.addWidget(self.formGroupBox)
 
         self.layout.addWidget(self.btnCalculate)
 
         self.setLayout(self.layout)
 
-        # mainLayout = QVBoxLayout()
-        # mainLayout.addWidget(self.formGroupBox)
-        # mainLayout.addWidget(buttonBox)
-        # self.setLayout(mainLayout)
-
     def connectUI(self):
         self.btnCalculate.clicked.connect(self.calculate)
 
     def calculate(self):
-        self.text.setText("E")
+        pass
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -119,7 +118,6 @@ def Retrieve (csv):
     return drinks
         
 #Retrieve("Open-Units.csv")   
-
 class Recomend(object):
     def __init__(self):
         self.drinks = Retrieve("drinks.csv")
@@ -146,7 +144,3 @@ class Recomend(object):
               self.drunk = True
       #while self.time < TOTAL TIME:
           self.NextDrink()        
-        
-
-
-          
