@@ -139,10 +139,10 @@ class Recomend(object):
         self.currentBACs = burnrate * timebetween * (self.currentBACs + self.currentdrink.BAC(MyWidget.txtWeight.text(), MyWidget.cbGender.text()))
         self.time += timebetween
 
-  def GetDrinks(self):
-      while not self.drunk:
-          #and self.time < TOTALTIME#
-          if(self.currentBACs > minbacs):
-              self.drunk = True
-      #while self.time < TOTAL TIME:
-          self.NextDrink()        
+    def GetDrinks(self):
+        while not self.drunk:
+            #and self.time < TOTALTIME#
+            if(self.currentBACs > minbacs):
+                self.drunk = True
+        #while self.time < TOTAL TIME:
+            self.NextDrink()        
