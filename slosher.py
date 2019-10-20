@@ -9,6 +9,10 @@ from PySide2.QtCore import *
 from PySide2.QtWidgets import *
 
 
+burnrate = 0.984
+goalbacs = 0.07
+timebetween = 0.25
+
 class MyWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -62,15 +66,16 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 
 class Drink(object):
-    def __init__(self, product, brand, catagory, style, quantity, units):
+    def __init__(self, product, brand, catagory, style, quantity, quantityunits, units):
         self.product = product
         self.brand = brand
         self.catagory = catagory
         self.style = style
         self.quantity = quantity
+        self.quantityunits = quantityunits
         self.units = units
         
-        if(self.style = ""):
+        if(self.style == ""):
             self.VoidStyle()
 
 
