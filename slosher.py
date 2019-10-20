@@ -57,7 +57,7 @@ class MyWidget(QtWidgets.QWidget):
         self.title.addWidget(self.lblTitle)
         self.title.addWidget(self.logo)
         self.titleBox.setLayout(self.title)
-        self.titleBox.setFixedHeight(200)
+        #self.titleBox.setFixedHeight(200)
         self.titleBox.setFlat(True)
 
         self.formGroupBox = QGroupBox("User data:")
