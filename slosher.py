@@ -89,6 +89,15 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate.clicked.connect(self.calculate)
 
     def calculate(self):
+        if self.txtHours.text() == "" or self.txtBetween.text() == "" or self.txtHours.text() == "":
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Fill in the boxes dummy!")
+            msg.setWindowTitle("You there!")
+
+            msg.exec()
+            return False
+
         minbacs = (float(self.slInebriation.value())/100) - 0.005
         maxbacs = (float(self.slInebriation.value())/100) + 0.005
         timebetween = (float(self.txtBetween.text()) / 60)
