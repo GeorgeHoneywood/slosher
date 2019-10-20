@@ -22,6 +22,7 @@ class MyWidget(QtWidgets.QWidget):
 
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
         self.txtHours = QLineEdit(self)
+        self.txtBetween = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
         self.lblResults = QLabel(self)
 
@@ -60,7 +61,8 @@ class MyWidget(QtWidgets.QWidget):
         self.titleBox.setFlat(True)
 
         self.formGroupBox = QGroupBox("User data")
-        self.form.addRow(QLabel("Pub time (minutes):"), self.txtHours)
+        self.form.addRow(QLabel("Total drinking time (minutes):"), self.txtHours)
+        self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtBetween)
         self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
         self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.form.addRow(QLabel("Inebriation level:"), self.slInebriation)
@@ -70,9 +72,9 @@ class MyWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.formGroupBox)
 
         self.layout.addWidget(self.btnCalculate)
-        self.layout.addWidget(self.lbl)
+        self.layout.addWidget(self.lblResults)
 
-        self.lblLayout(self.layout)
+        self.setLayout(self.layout)
 
     def connectUI(self):
         self.btnCalculate.clicked.connect(self.calculate)
