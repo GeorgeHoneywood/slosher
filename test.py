@@ -19,10 +19,10 @@ class MyWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.btnCalculate)
         self.setLayout(self.layout)
 
-        self.btnCalculate.clicked.connect(self.magic)
+        self.btnCalculate.clicked.connect(self.calculate)
 
 
-    def magic(self):
+    def calculate(self):
         self.text.setText("E")
 
 if __name__ == "__main__":
