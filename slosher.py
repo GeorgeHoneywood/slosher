@@ -91,7 +91,9 @@ class MyWidget(QtWidgets.QWidget):
     def calculate(self):
         minbacs = (float(self.slInebriation.value())/100) - 0.005
         maxbacs = (float(self.slInebriation.value())/100) + 0.005
+        #print(minbacs, maxbacs)
         timebetween = (float(self.txtBetween.text()) / 60)
+        print(timebetween)
         recomend = Recomend()
         foo = ""
 
@@ -130,12 +132,12 @@ class Drink(object):
 
     def BAC(self, weight, sex):
         r = -1
-        if(sex.lower == "female"):
+        if(sex.lower() == "female"):
             r = 0.55
-        elif(sex.lower == "male"):
+        elif(sex.lower() == "male"):
             r = 0.68
 
-        self.bac = ( self.AcoholGrams() / (float(weight) * r) ) * 100
+        self.bac = ( self.AcoholGrams() / (float(weight) * r) )
 
     def AcoholGrams(self):
         return float(self.units) * 8
@@ -151,36 +153,34 @@ class Recomend(object):
         self.recomended.append(self.currentdrink)
         self.time = 0
         self.GetDrinks()
+        self.possibledrinks = []
 
     def NextDrink(self):
-        possibledrinks = []
         for i in self.drinks:
-            if burnrate * timebetween * (self.currentBACs + i.bac) < maxbacs and burnrate * timebetween * (self.currentBACs + i.bac) > minbacs and i.catagory == self.currentdrink.catagory:
-                possibledrinks.append(i)
+            if i.catagory == self.currentdrink.catagory and i.bac == 0:
+                self.possibledrinks.append(i)
+            elif burnrate * timebetween * (self.currentBACs + i.bac) < maxbacs and i.catagory == self.currentdrink.catagory and self.drunk == False:
+                self.possibledrinks.append(i)
+                print(i.bac)
+            elif burnrate * timebetween * (self.currentBACs + i.bac) < maxbacs and burnrate * timebetween * (self.currentBACs + i.bac) > minbacs and i.catagory == self.currentdrink.catagory:
+                self.possibledrinks.append(i)
+                print(i.bac)
 
-        self.currentdrink = possibledrinks[random.randint(0, len(possibledrinks) - 1)]
+        self.currentdrink = self.possibledrinks[random.randint(0, len(self.possibledrinks) - 1)]
         self.currentBACs = burnrate * timebetween * (self.currentBACs + self.currentdrink.bac)
         self.time += timebetween
 
-    def FirstDrinks(self):
-        possibledrinks = []
-        for i in self.drinks:
-            if burnrate * timebetween * (self.currentBACs + i.bac) < maxbacs and i.catagory == self.currentdrink.catagory:
-                possibledrinks.append(i)
-
-        self.currentdrink = possibledrinks[random.randint(0, len(possibledrinks) - 1)]
-        self.currentBACs = burnrate * timebetween * (self.currentBACs + self.currentdrink.bac)
-        self.time += timebetween
 
     def GetDrinks(self):
-        while not self.drunk and self.time < int(widget.txtHours.text()) / 60:
-            self.FirstDrinks()
+        self.possibledrinks = []
+        while self.time < int(widget.txtHours.text()) / 60:
+            self.NextDrink()
+            
             self.recomended.append(self.currentdrink)
+            
             if(self.currentBACs > minbacs):
                 self.drunk = True
-        while self.time < (int(widget.txtHours.text()) / 60):
-            self.NextDrink()
-            self.recomended.append(self.currentdrink)
+        print(len(self.recomended))
         
 def Retrieve (csv):
     file = open(csv, "r")
