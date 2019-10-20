@@ -8,7 +8,6 @@ from PySide2.QtGui import *
 from PySide2.QtCore import *
 from PySide2.QtWidgets import *
 
-
 burnrate = 0.984
 goalbacs = 0.07
 timebetween = 0.25
@@ -33,8 +32,11 @@ class MyWidget(QtWidgets.QWidget):
         self.layout = QtWidgets.QVBoxLayout()
         self.form = QFormLayout()
 
+        self.logo = QLabel(self)
+
+
         self.formGroupBox = QGroupBox("User data")
-        self.form.addRow(QLabel("Height (cm):"), self.txtHeight)
+        self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHeight)
         self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
         self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.formGroupBox.setLayout(self.form)
@@ -45,15 +47,11 @@ class MyWidget(QtWidgets.QWidget):
 
         self.setLayout(self.layout)
 
-        # mainLayout = QVBoxLayout()
-        # mainLayout.addWidget(self.formGroupBox)
-        # mainLayout.addWidget(buttonBox)
-        # self.setLayout(mainLayout)
-
     def connectUI(self):
         self.btnCalculate.clicked.connect(self.calculate)
 
     def calculate(self):
+        print(self.txtHeight.text())
         pass
 
 if __name__ == "__main__":
