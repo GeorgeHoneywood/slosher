@@ -98,7 +98,25 @@ class Drink(object):
     def AcoholGrams(self):
         return self.units * 8
         
-
+def Retrieve (csv):
+    file = open(csv, "r")
+    drinks = []
+    for line in file:
+        array = []
+        item = ""
+        for i in range (0,len(line)):
+            if line[i] == ",":
+                array.append(item)
+                item = ""
+            else:
+                item += line[i]    
+        item = item.replace("\n","")
+        array.append(item)
+        drinks.append(Drink(array[0],array[1],array[2],array[3],array[4],array[5],array[6]))
+    #print (drinks)
+    file.close()
+        
+#Retrieve("Open-Units.csv")   
 
 
 
