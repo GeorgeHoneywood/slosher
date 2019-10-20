@@ -22,15 +22,20 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
         self.txtHours = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
-        self.cbSex = QComboBox(self)
 
+        self.cbSex = QComboBox(self)
         self.cbSex.addItems(["Male", "Female"])
+
+        self.slInebriation = QSlider(Qt.Horizontal)
+        self.slInebriation.setMinimum(0.0)
+        self.slInebriation.setMinimum(0.15)
 
         self.layoutUI()
         self.connectUI()
 
     def layoutUI(self):
         self.layout = QtWidgets.QVBoxLayout()
+        self.title = QtWidgets.QHBoxLayout()
         self.form = QFormLayout()
 
         image = QPixmap('logo.png')
@@ -39,13 +44,21 @@ class MyWidget(QtWidgets.QWidget):
         self.logo.setFixedHeight(image.height())
         self.logo.setAlignment(Qt.AlignRight)
 
+        self.lblTitle = QLabel("The correct amount for you to drink")
+
+        self.titleBox = QGroupBox()
+        self.title.addWidget(self.lblTitle)
+        self.title.addWidget(self.logo)
+        self.titleBox.setLayout(self.title)
+
         self.formGroupBox = QGroupBox("User data")
         self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHours)
         self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
         self.form.addRow(QLabel("Sex:"), self.cbSex)
+        self.form.addRow(QLabel("Inebriation level:"), self.slInebriation)
         self.formGroupBox.setLayout(self.form)
         
-        self.layout.addWidget(self.logo)
+        self.layout.addWidget(self.titleBox)
         self.layout.addWidget(self.formGroupBox)
 
         self.layout.addWidget(self.btnCalculate)
