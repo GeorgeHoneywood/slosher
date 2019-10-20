@@ -28,10 +28,12 @@ class MyWidget(QtWidgets.QWidget):
         self.cbSex.addItems(["Male", "Female"])
 
         self.slInebriation = QSlider(Qt.Horizontal)
-        self.slInebriation.setMinimum(0.2)
-        self.slInebriation.setMinimum(0.15)
-        self.slInebriation.setTickPosition(QSlider.TicksBelow)
-        self.slInebriation.setTickInterval(13)
+        self.slInebriation.setMinimum(1)
+        self.slInebriation.setMaximum(16)
+        self.slInebriation.setValue(8)
+        #self.slInebriation.setSingleStep(0.01)
+        #self.slInebriation.setTickPosition(QSlider.TicksBelow)
+        #self.slInebriation.setTickInterval(13)
 
         self.layoutUI()
         self.connectUI()
@@ -54,9 +56,10 @@ class MyWidget(QtWidgets.QWidget):
         self.title.addWidget(self.logo)
         self.titleBox.setLayout(self.title)
         self.titleBox.setFixedHeight(200)
+        self.titleBox.setFlat(True)
 
         self.formGroupBox = QGroupBox("User data")
-        self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtHours)
+        self.form.addRow(QLabel("Pub time (minutes):"), self.txtHours)
         self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
         self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.form.addRow(QLabel("Inebriation level:"), self.slInebriation)
