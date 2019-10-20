@@ -9,6 +9,10 @@ from PySide2.QtCore import *
 from PySide2.QtWidgets import *
 
 
+burnrate = 0.984
+goalbacs = 0.07
+timebetween = 0.25
+
 class MyWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -67,12 +71,13 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 
 class Drink(object):
-    def __init__(self, product, brand, catagory, style, quantity, units):
+    def __init__(self, product, brand, catagory, style, quantity, quantityunits, units):
         self.product = product
         self.brand = brand
         self.catagory = catagory
         self.style = style
         self.quantity = quantity
+        self.quantityunits = quantityunits
         self.units = units
         
         if(self.style == ""):
@@ -93,7 +98,25 @@ class Drink(object):
     def AcoholGrams(self):
         return self.units * 8
         
-
+def Retrieve (csv):
+    file = open(csv, "r")
+    drinks = []
+    for line in file:
+        array = []
+        item = ""
+        for i in range (0,len(line)):
+            if line[i] == ",":
+                array.append(item)
+                item = ""
+            else:
+                item += line[i]    
+        item = item.replace("\n","")
+        array.append(item)
+        drinks.append(Drink(array[0],array[1],array[2],array[3],array[4],array[5],array[6]))
+    #print (drinks)
+    file.close()
+        
+#Retrieve("Open-Units.csv")   
 
 
 
