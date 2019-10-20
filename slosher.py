@@ -130,9 +130,9 @@ class Drink(object):
 
     def BAC(self, weight, sex):
         r = -1
-        if(sex.lower == "female"):
+        if  sex == "Female":
             r = 0.55
-        elif(sex.lower == "male"):
+        elif sex == "Male":
             r = 0.68
 
         self.bac = ( self.AcoholGrams() / (float(weight) * r) ) * 100
