@@ -18,9 +18,9 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate = QtWidgets.QPushButton("Calculate!")
         self.txtHeight = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
-        self.cbGender = QCheckBox("Male?", self)
-        #self.txtGender = 
-        #self.text.setAlignment(QtCore.Qt.AlignCenter)
+        self.cbSex = QComboBox(self)
+
+        self.cbSex.addItems(["Male", "Female"])
 
         self.layoutUI()
         self.connectUI()
@@ -30,9 +30,9 @@ class MyWidget(QtWidgets.QWidget):
         self.form = QFormLayout()
 
         self.formGroupBox = QGroupBox("User data")
-        self.form.addRow(QLabel("Height:"), self.txtHeight)
-        self.form.addRow(QLabel("Weight:"), self.txtWeight)
-        self.form.addRow(QLabel("Gender:"), self.cbGender)
+        self.form.addRow(QLabel("Height (cm):"), self.txtHeight)
+        self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
+        self.form.addRow(QLabel("Sex:"), self.cbSex)
         self.formGroupBox.setLayout(self.form)
         
         self.layout.addWidget(self.formGroupBox)
@@ -50,7 +50,7 @@ class MyWidget(QtWidgets.QWidget):
         self.btnCalculate.clicked.connect(self.calculate)
 
     def calculate(self):
-        self.text.setText("E")
+        pass
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
