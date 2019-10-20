@@ -71,8 +71,8 @@ class MyWidget(QtWidgets.QWidget):
         self.resultsTable = QTableWidget()
         self.resultsTable.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.resultsTable.setRowCount(0)
-        self.resultsTable.setColumnCount(2)
-        self.resultsTable.setHorizontalHeaderLabels(["Drink", "Quantity"])
+        self.resultsTable.setColumnCount(3)
+        self.resultsTable.setHorizontalHeaderLabels(["Drink", "Quantity", "Units"])
 
         self.layout.addWidget(self.titleBox)
         self.layout.addWidget(self.formGroupBox)
@@ -112,6 +112,7 @@ class MyWidget(QtWidgets.QWidget):
 
             self.resultsTable.setItem(rowPosition, 0, QTableWidgetItem(i.product))
             self.resultsTable.setItem(rowPosition, 1, QTableWidgetItem(i.quantity + i.quantityunits))
+            self.resultsTable.setItem(rowPosition, 2, QTableWidgetItem(i.units))
 
             #foo = foo + i.product + " " + i.quantity + i.quantityunits + "\n"
 
