@@ -28,8 +28,10 @@ class MyWidget(QtWidgets.QWidget):
         self.cbSex.addItems(["Male", "Female"])
 
         self.slInebriation = QSlider(Qt.Horizontal)
-        self.slInebriation.setMinimum(0.0)
+        self.slInebriation.setMinimum(0.2)
         self.slInebriation.setMinimum(0.15)
+        self.slInebriation.setTickPosition(QSlider.TicksBelow)
+        self.slInebriation.setTickInterval(13)
 
         self.layoutUI()
         self.connectUI()
