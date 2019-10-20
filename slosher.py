@@ -24,7 +24,7 @@ class MyWidget(QtWidgets.QWidget):
         self.txtHours = QLineEdit(self)
         self.txtBetween = QLineEdit(self)
         self.txtWeight = QLineEdit(self)
-        self.lblResults = QLabel(self)
+        #self.lblResults = QLabel(self)
 
         self.cbSex = QComboBox(self)
         self.cbSex.addItems(["Male", "Female"])
@@ -51,16 +51,16 @@ class MyWidget(QtWidgets.QWidget):
         self.logo.setFixedHeight(image.height())
         self.logo.setAlignment(Qt.AlignRight)
 
-        self.lblTitle = QLabel("The correct amount for you to drink.")
+        self.lblTitle = QLabel("The correct amount for you to drink.\n\nYou can adjust the slider to control\nhow drunk you will become:\n - The right will have you falling over\n - The left will have you mildly buzzing")
 
-        self.titleBox = QGroupBox()
+        self.titleBox = QGroupBox("Information:")
         self.title.addWidget(self.lblTitle)
         self.title.addWidget(self.logo)
         self.titleBox.setLayout(self.title)
         self.titleBox.setFixedHeight(200)
         self.titleBox.setFlat(True)
 
-        self.formGroupBox = QGroupBox("User data")
+        self.formGroupBox = QGroupBox("User data:")
         self.form.addRow(QLabel("Total drinking time (minutes):"), self.txtHours)
         self.form.addRow(QLabel("Time between drinks (minutes):"), self.txtBetween)
         self.form.addRow(QLabel("Weight (kg):"), self.txtWeight)
@@ -68,13 +68,22 @@ class MyWidget(QtWidgets.QWidget):
         self.form.addRow(QLabel("Inebriation level:"), self.slInebriation)
         self.formGroupBox.setLayout(self.form)
 
+        self.resultsTable = QTableWidget()
+        self.resultsTable.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.resultsTable.setRowCount(0)
+        self.resultsTable.setColumnCount(2)
+        self.resultsTable.setHorizontalHeaderLabels(["Drink", "Quantity"])
+
         self.layout.addWidget(self.titleBox)
         self.layout.addWidget(self.formGroupBox)
 
         self.layout.addWidget(self.btnCalculate)
-        self.layout.addWidget(self.lblResults)
+        #self.layout.addWidget(self.lblResults)
+        self.layout.addWidget(self.resultsTable)
 
         self.setLayout(self.layout)
+
+        self.adjustSize()
 
     def connectUI(self):
         self.btnCalculate.clicked.connect(self.calculate)
@@ -85,9 +94,21 @@ class MyWidget(QtWidgets.QWidget):
         timebetween = (float(self.txtBetween.text()) / 60)
         recomend = Recomend()
         foo = ""
+
+        self.resultsTable.setRowCount(0)
+
         for i in recomend.recomended:
-            foo = foo + i.product + " " + i.quantity + i.quantityunits + "\n"
-        self.lblResults.setText(foo)
+            rowPosition = self.resultsTable.rowCount()
+            self.resultsTable.insertRow(rowPosition)
+
+            self.resultsTable.setItem(rowPosition, 0, QTableWidgetItem(i.product))
+            self.resultsTable.setItem(rowPosition, 1, QTableWidgetItem(i.quantity + i.quantityunits))
+
+            #foo = foo + i.product + " " + i.quantity + i.quantityunits + "\n"
+
+        self.resultsTable.resizeColumnsToContents()
+        self.adjustSize()
+        #self.lblResults.setText(foo)
 
 
 class Drink(object):
@@ -193,7 +214,7 @@ if __name__ == "__main__":
     #palette.setColor(widget.backgroundRole(), QColor(93,91,89))
     widget.setPalette(palette)
 
-    widget.resize(800, 600)
+    widget.resize(10, 600)
     widget.show()
 
     sys.exit(app.exec_())
