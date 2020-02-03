@@ -69,7 +69,11 @@ class MyWidget(QtWidgets.QWidget):
         self.resultsTable.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.resultsTable.setRowCount(0)
         self.resultsTable.setColumnCount(3)
+<<<<<<< HEAD
         self.resultsTable.setHorizontalHeaderLabels(["Drink", "Quantity", "BAC"])
+=======
+        self.resultsTable.setHorizontalHeaderLabels(["Drink", "Quantity", "Units"])
+>>>>>>> e1e5a18ccfa46ba44927c3489c8a63b679934dea
 
         self.layout.addWidget(self.titleBox)
         self.layout.addWidget(self.formGroupBox)
@@ -88,6 +92,7 @@ class MyWidget(QtWidgets.QWidget):
     def calculate(self):
         global minbacs
         global maxbacs
+
         minbacs = (float(self.slInebriation.value())/100) - 0.005
         maxbacs = (float(self.slInebriation.value())/100) + 0.005
         #print(minbacs, maxbacs)
